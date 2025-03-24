@@ -1,6 +1,6 @@
 # Diagrama de Red
 
-![diagrama de red](images/network-diagrama.png)
+![diagrama de red](https://github.com/klartz/prueba-tecnica-craftech/blob/main/images/network-diagram.png)
 
 ## Componentes/servicios utilizados
 
@@ -62,8 +62,7 @@ El projecto se levanta ejecutando:
 ```bash
 docker compose up --build
 ```
-
-![deployment](images/deployment.png)
+![deployment](https://github.com/klartz/prueba-tecnica-craftech/blob/main/images/deployment.png)
 
 ## AWS
 
@@ -113,7 +112,7 @@ Para deployar la aplicación en AWS seguí los siguientes pasos
     ```yaml
       frontend:
         image: frontend
-    		...
+        ...
     ```
 
     Y ejecutar:
