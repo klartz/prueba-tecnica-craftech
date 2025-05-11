@@ -127,13 +127,13 @@ Los archivos correspondientes a la prueba 3 se encuentran en los directorios `ci
 ```sh
 prueba-tecnica-craftech
 ├── .github
-│   └── workflows
-│		    └── deploy-nginx.yml
+│   └── workflows
+│   └── deploy-nginx.yml
 └── cicd-pipeline
-		└── docker
-		    └── nginx
-		        ├── Dockerfile
-		        └── index.html
+    └── docker
+    └── nginx
+        ├── Dockerfile
+        └── index.html
 ```
 El pipeline está definido en `.github/workflows/deploy-nginx.yml` y se activa únicamente ante cambios en `cicd-pipeline/docker/nginx/index.html`.
 Cuenta con dos trabajos: `build`, que construye y sube la imagen al GitHub Container Registry, y `deploy`, que simula su despliegue ejecutando el contenedor en el runner, verificando que funcione correctamente.
