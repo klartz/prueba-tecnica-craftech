@@ -141,3 +141,4 @@ Cuenta con dos trabajos: `build`, que construye y sube la imagen al GitHub Conta
 En un entorno real, el job de despliegue consistiría en acceder al entorno de producción, obtener la imagen desde el registro y levantar el contenedor actualizado.
 
 El resultado de cada ejecución puede consultarse desde la pestaña **Actions** del repositorio:
+![Github actions](images/cicd-pipeline.png)
