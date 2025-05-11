@@ -75,7 +75,7 @@ Para deployar la aplicación en AWS seguí los siguientes pasos
 2. Conectarse via ssh a la instancia
 
     ```bash
-    scp -i "aws.pem" -o IdentitiesOnly=yes ubuntu@<ec2-ip>
+    ssh -i "aws.pem" -o IdentitiesOnly=yes ubuntu@<ec2-ip>
     ```
 
 3. Preparar docker
