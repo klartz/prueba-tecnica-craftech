@@ -121,3 +121,23 @@ Para deployar la aplicación en AWS seguí los siguientes pasos
     docker load -i frontend.tar
     docker compose up -d
     ```
+
+# CI/CD pipeline
+Los archivos correspondientes a la prueba 3 se encuentran en los directorios `cicd-pipeline/` y `.github/` dentro de este repositorio, con la siguiente estructura:
+```sh
+prueba-tecnica-craftech
+├── .github
+│   └── workflows
+│		    └── deploy-nginx.yml
+└── cicd-pipeline
+		└── docker
+		    └── nginx
+		        ├── Dockerfile
+		        └── index.html
+```
+El pipeline está definido en `.github/workflows/deploy-nginx.yml` y se activa únicamente ante cambios en `cicd-pipeline/docker/nginx/index.html`.
+Cuenta con dos trabajos: `build`, que construye y sube la imagen al GitHub Container Registry, y `deploy`, que simula su despliegue ejecutando el contenedor en el runner, verificando que funcione correctamente.
+
+En un entorno real, el job de despliegue consistiría en acceder al entorno de producción, obtener la imagen desde el registro y levantar el contenedor actualizado.
+
+El resultado de cada ejecución puede consultarse desde la pestaña **Actions** del repositorio:
