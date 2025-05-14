@@ -16,7 +16,7 @@
 3. **Bases de Datos**
     1. **Amazon RDS**: Base de datos relacional.
     2. **Amazon DynamoDB**: Base de datos no relacional.
-    3. **Réplicas**: Se mantienen réplicas tanto para ambas bases de datos, asegurando alta disponibilidad y redundancia.
+    3. **Réplicas**: Se mantienen réplicas para ambas bases de datos, asegurando alta disponibilidad y redundancia.
 
 ---
 
@@ -84,11 +84,15 @@ Para deployar la aplicación en AWS seguí los siguientes pasos
     3. Configuro el servicio de docker para que inicie automáticamente al bootear en el sistema (https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd)
 4. Preparar el proyecto
 
+    Clonar el proyecto en la instancia:
     ```bash
     git clone https://github.com/klartz/prueba-tecnica-craftech.git
     cd prueba-tecnica-craftech
-    # transfiero las variables de entorno del backend a la instancia
-    scp -i "aws.pem" -o IdentitiesOnly=yes ./backend/.env ubuntu@<ec2-ip>:/home/ubuntu/prueba-tecnica-craftech/backend/
+    ```
+
+    Desde mi máquina, transferiero las variables de entorno del backend a la instancia:
+    ```sh
+    scp -i "~/.ssh/aws.pem" -o IdentitiesOnly=yes ./backend/.env ubuntu@<ec2-ip>:/home/ubuntu/prueba-tecnica-craftech/backend/
     ```
 
 5. Configurar los puertos en el panel de administración de Security Groups
@@ -102,9 +106,10 @@ Para deployar la aplicación en AWS seguí los siguientes pasos
     Nota: al intentar construir la imagen del frontend la instancia se quedaba sin memoria (pues tiene 1GB de RAM) y se desconectaba, por lo que opté por construir la imagen localmente y transferirla:
 
     ```bash
+    cd frontend
     docker build -t frontend .
     docker save -o frontend.tar frontend
-    scp -i "aws.pem" -o IdentitiesOnly=yes frontend.tar ubuntu@<ec2-ip>:/home/ubuntu/prueba-tecnica-craftech/
+    scp -i "~/.ssh/aws.pem" -o IdentitiesOnly=yes frontend.tar ubuntu@<ec2-ip>:/home/ubuntu/prueba-tecnica-craftech/
     ```
 
     Luego para utilizar esta imagen al levantar la aplicación, es necesario modificar el `docker-compose.yml` para que utilice la imagen local:
@@ -115,11 +120,11 @@ Para deployar la aplicación en AWS seguí los siguientes pasos
         ...
     ```
 
-    Y ejecutar:
+    Y en el servidor ejecutar:
 
     ```bash
     docker load -i frontend.tar
-    docker compose up -d
+    docker compose up
     ```
 
 # CI/CD pipeline
